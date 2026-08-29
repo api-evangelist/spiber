@@ -1,0 +1,43 @@
+generated: '2026-08-29'
+method: probed
+source: >-
+  live error responses from https://spiber.xsrv.jp/api/wp-json/wp/v2/nonexistent (HTTP 404) and
+  the WordPress REST discovery document
+note: >-
+  Spiber publishes no error reference. This catalog records only error shapes actually observed on
+  the wire against the live service, plus the envelope those responses use. The envelope is the
+  WordPress REST error object, NOT RFC 9457 application/problem+json — responses are served as
+  application/json with a code/message/data.status body. Error messages are localised to Japanese
+  by the service's locale, which is itself a finding for any agent parsing them. No error taxonomy
+  beyond what was observed is asserted here.
+api: spiber-content-api
+format: wordpress-rest-error
+media_type: application/json
+rfc9457: false
+envelope:
+  fields:
+  - name: code
+    type: string
+    description: machine-readable error slug, e.g. rest_no_route
+  - name: message
+    type: string
+    description: human-readable message, localised to the site locale (observed in Japanese)
+  - name: data
+    type: object
+    description: carries the HTTP status
+  - name: data.status
+    type: integer
+    description: the HTTP status code, repeated in the body
+problem_types:
+- code: rest_no_route
+  status: 404
+  title: No route matched the URL and request method
+  observed: true
+  observed_at: https://spiber.xsrv.jp/api/wp-json/wp/v2/nonexistent
+  remediation: >-
+    Read the route table from the discovery document at /wp-json/ and use a registered rest_base.
+localization:
+  localized: true
+  observed_locale: ja
+  note: >-
+    Error messages are returned in Japanese. Consumers must branch on `code`, never on `message`.

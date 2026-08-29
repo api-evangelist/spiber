@@ -1,0 +1,141 @@
+generated: '2026-08-29'
+method: probed
+source: >-
+  https://spiber.xsrv.jp/api/wp-json/wp/v2/types (HTTP 200) and
+  https://spiber.xsrv.jp/api/wp-json/wp/v2/taxonomies (HTTP 200)
+note: >-
+  Derived entirely from the live type and taxonomy registries the service publishes about itself.
+  The custom post types are the interesting part: they are Spiber's own content model — projects,
+  news, news_en, academic-papers, creations, positions — with a department taxonomy shared between
+  projects and open positions, and separate news categories per language. The generic WordPress
+  block-editor types (templates, global styles, font families) are recorded for completeness but
+  carry no Spiber domain meaning.
+api: spiber-content-api
+base_url: https://spiber.xsrv.jp/api/wp-json
+entities:
+- name: post
+  rest_base: posts
+  path: /wp/v2/posts
+  hierarchical: false
+  domain: generic
+- name: page
+  rest_base: pages
+  path: /wp/v2/pages
+  hierarchical: true
+  domain: generic
+  record_count_observed: 20
+- name: attachment
+  rest_base: media
+  path: /wp/v2/media
+  hierarchical: false
+  domain: generic
+- name: news
+  rest_base: news
+  path: /wp/v2/news
+  hierarchical: false
+  domain: spiber
+  description: Japanese-language news items behind spiber.inc/ja/news
+- name: news_en
+  rest_base: news_en
+  path: /wp/v2/news_en
+  hierarchical: false
+  domain: spiber
+  description: English-language news items behind spiber.inc/en/news
+- name: academic-papers
+  rest_base: academic-papers
+  path: /wp/v2/academic-papers
+  hierarchical: false
+  domain: spiber
+  description: Spiber's published research output, rendered at spiber.inc/en/academic-papers
+- name: projects
+  rest_base: projects
+  path: /wp/v2/projects
+  hierarchical: false
+  domain: spiber
+- name: creations
+  rest_base: creations
+  path: /wp/v2/creations
+  hierarchical: false
+  domain: spiber
+  description: Brand collaborations and finished goods made with Brewed Protein materials
+- name: positions
+  rest_base: positions
+  path: /wp/v2/positions
+  hierarchical: false
+  domain: spiber
+  description: Open roles, rendered at spiber.inc/en/careers
+taxonomies:
+- name: category
+  rest_base: categories
+  applies_to: [post, projects, creations]
+- name: post_tag
+  rest_base: tags
+  applies_to: [post, projects, news_en]
+- name: department
+  rest_base: department
+  applies_to: [projects, positions]
+  domain: spiber
+- name: news-category
+  rest_base: news-category
+  applies_to: [news]
+  domain: spiber
+- name: news-category_en
+  rest_base: news-category_en
+  applies_to: [news_en]
+  domain: spiber
+- name: academic-papers-category
+  rest_base: academic-papers-category
+  applies_to: [academic-papers]
+  domain: spiber
+relationships:
+- from: post
+  to: category
+  type: has_many
+  via: categories
+- from: post
+  to: post_tag
+  type: has_many
+  via: tags
+- from: projects
+  to: department
+  type: has_many
+  via: department
+- from: positions
+  to: department
+  type: has_many
+  via: department
+- from: news
+  to: news-category
+  type: has_many
+  via: news-category
+- from: news_en
+  to: news-category_en
+  type: has_many
+  via: news-category_en
+- from: news_en
+  to: post_tag
+  type: has_many
+  via: tags
+- from: academic-papers
+  to: academic-papers-category
+  type: has_many
+  via: academic-papers-category
+- from: creations
+  to: category
+  type: has_many
+  via: categories
+- from: page
+  to: page
+  type: belongs_to
+  via: parent
+  note: pages are hierarchical
+custom_endpoints:
+- path: /custom/v1/menus
+  methods: [GET]
+  description: site navigation menus
+- path: /custom/v1/all-news
+  methods: [GET]
+  description: flattened Japanese news listing
+- path: /custom/v1/all-news-en
+  methods: [GET]
+  description: flattened English news listing; observed HTTP 200 anonymously

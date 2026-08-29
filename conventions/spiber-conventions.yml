@@ -1,0 +1,80 @@
+generated: '2026-08-29'
+method: probed
+source: >-
+  live responses and headers from https://spiber.xsrv.jp/api/wp-json/ and its wp/v2 routes
+note: >-
+  Spiber documents none of this. Every convention below was read off live responses from the
+  service itself, or off the route table the service publishes in its own discovery document.
+  Nothing here is taken from generic WordPress documentation and asserted as Spiber's behaviour.
+api: spiber-content-api
+auth_style:
+  anonymous_read: true
+  authenticated: Application Passwords (HTTP Basic) or a jwt-auth bearer token; see
+    authentication/spiber-authentication.yml
+pagination:
+  style: page-number
+  request_params:
+  - name: page
+    description: 1-indexed page number
+  - name: per_page
+    description: page size
+  response_headers:
+  - name: X-WP-Total
+    description: total matching records
+  - name: X-WP-TotalPages
+    description: total pages at the current per_page
+  link_header: true
+  link_rels:
+  - next
+  evidence: >-
+    'GET /wp/v2/pages?per_page=1 returned X-WP-Total: 20, X-WP-TotalPages: 20 and
+    Link: <.../pages?per_page=1&page=2>; rel="next"'
+filtering_and_expansion:
+  embed: >-
+    The _embed query parameter expands linked resources inline; _links is present on every record.
+  sparse_fields: The _fields query parameter selects a subset of fields.
+  evidence: _links present on live records returned from /wp/v2/pages
+versioning:
+  style: namespace-in-path
+  current: wp/v2
+  namespaces_registered:
+  - oembed/1.0
+  - jwt-auth/v1
+  - wp/v2
+  - wp-site-health/v1
+  - wp-block-editor/v1
+  - wp-abilities/v1
+  - custom/v1
+  - custom-save-revision/v1
+  note: >-
+    Version is carried in the path namespace. No header-based versioning, no version negotiation,
+    and no published deprecation signal.
+error_envelope:
+  see: errors/spiber-problem-types.yml
+  rfc9457: false
+rate_limit_signaling:
+  see: rate-limits/spiber-rate-limits.yml
+  headers_present: false
+request_id_tracing:
+  supported: false
+  note: No correlation, request-id, or trace header was observed on any live response.
+idempotency:
+  supported: false
+  state: na
+  note: >-
+    The public surface is read-only for anonymous callers. GET is idempotent by HTTP semantics,
+    but the service publishes no idempotency-key mechanism, no Idempotency-Key header, and no
+    replay-protection contract. There is no anonymous write surface for one to apply to.
+dry_run_mode:
+  supported: false
+  state: na
+  note: No write surface is reachable anonymously, so there is nothing to rehearse.
+reversibility:
+  state: na
+  grade: na
+  note: >-
+    There is no anonymous write surface on this API, so reversibility does not apply. No create,
+    update, or delete operation can be invoked without WordPress credentials, and Spiber publishes
+    no documentation stating a reversal operation or a reversal window for any of them. No window
+    is asserted here because none is published.
+  write_surfaces: []

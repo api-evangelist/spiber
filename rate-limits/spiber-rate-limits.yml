@@ -1,0 +1,22 @@
+generated: '2026-08-29'
+method: probed
+source: >-
+  live unauthenticated responses from https://spiber.xsrv.jp/api/wp-json/wp/v2/posts and
+  /wp/v2/pages, response headers inspected
+note: >-
+  Spiber publishes no API documentation of any kind, so there is no documented limit to record.
+  Live unauthenticated responses carry no rate-limit signalling headers at all — no X-RateLimit-*,
+  no RateLimit-*, no Retry-After. The only counting headers present are the WordPress pagination
+  headers X-WP-Total and X-WP-TotalPages. An honest zero.
+limit_count: 0
+limits: []
+headers:
+  rate_limit_headers_observed: []
+  exhaustion_status_code: null
+  retry_after: false
+observed_response_headers:
+- x-wp-total
+- x-wp-totalpages
+- link (rel="next" pagination)
+- x-robots-tag (noindex)
+- access-control-allow-headers

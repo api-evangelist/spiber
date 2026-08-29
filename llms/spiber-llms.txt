@@ -1,0 +1,57 @@
+# Spiber Inc.
+
+> Spiber Inc. is a Japanese biotechnology and advanced-materials company founded in 2007 and
+> headquartered in Tsuruoka, Yamagata Prefecture. It develops Brewed Protein materials — structural
+> proteins produced by precision fermentation of plant-derived sugars, spun into fibers, resins and
+> films as animal-free, petroleum-free alternatives to silk, wool, cashmere, leather and synthetic
+> polymers. Spiber is a materials manufacturer, not a software vendor.
+
+## What Spiber does NOT publish
+
+Spiber operates no developer program. There is no developer portal, no API reference, no OpenAPI
+or AsyncAPI specification, no GraphQL endpoint, no SDK, no CLI, no MCP server, no A2A agent card,
+no sandbox, no status page, no changelog, no pricing or plans, and no `/.well-known/` document on
+any host. Every one of those was probed on 2026-08-29 and returned 404 or was absent. Do not look
+for a Spiber API key; none is issued.
+
+## The one machine-readable surface
+
+Spiber's corporate site runs on a headless WordPress backend whose REST API is publicly readable
+and names itself "Spiber API" in its own discovery document. It is website infrastructure, not a
+product, and Spiber publishes no documentation for it. Every response carries
+`X-Robots-Tag: noindex`.
+
+- [API discovery document](https://spiber.xsrv.jp/api/wp-json/): route table, namespaces, and the
+  declared authentication mechanism
+- [English news](https://spiber.xsrv.jp/api/wp-json/wp/v2/news_en): English-language news items
+- [Academic papers](https://spiber.xsrv.jp/api/wp-json/wp/v2/academic-papers): Spiber's published
+  research output
+- [Creations](https://spiber.xsrv.jp/api/wp-json/wp/v2/creations): brand collaborations and
+  finished goods
+- [Open positions](https://spiber.xsrv.jp/api/wp-json/wp/v2/positions): open roles
+- [Projects](https://spiber.xsrv.jp/api/wp-json/wp/v2/projects): projects, filterable by department
+
+Conventions: anonymous GET only; `page` / `per_page` pagination with `X-WP-Total` and
+`X-WP-TotalPages` response headers and an RFC 8288 `Link: rel="next"`; errors are the WordPress
+`{code, message, data.status}` object served as `application/json`, not RFC 9457 — and messages are
+returned in Japanese, so branch on `code`, never on `message`. No rate-limit headers are sent.
+
+## Company
+
+- [Spiber Inc.](https://spiber.inc/en): official website
+- [About](https://spiber.inc/en/about): company overview
+- [Brewed Protein](https://spiber.inc/en/protein): the material and how it is made
+- [Innovation](https://spiber.inc/en/innovation): research and technology
+- [Sustainability](https://spiber.inc/en/sustainability): environmental program and LCA
+- [Academic papers](https://spiber.inc/en/academic-papers): peer-reviewed research
+- [News and stories](https://spiber.inc/en/news): newsroom ([RSS](https://spiber.inc/en/news/feed))
+- [Careers](https://spiber.inc/en/careers): open roles
+- [Privacy policy](https://spiber.inc/en/privacy-policy)
+- [GitHub](https://github.com/Spiber): verified organization, currently no public repositories
+
+## Optional
+
+- [Projects](https://spiber.inc/en/projects)
+- [Creations](https://spiber.inc/en/creations)
+- [Our mission](https://spiber.inc/en/our-mission)
+- [Cookie policy](https://spiber.inc/en/cookie-policy)

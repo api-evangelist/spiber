@@ -1,0 +1,42 @@
+generated: '2026-08-29'
+method: searched
+source: https://spiber.inc/en and live probes of the API host
+note: >-
+  Spiber operates no developer program, so none of the lifecycle surfaces a developer would look
+  for exist. There is no status page, no SLA, no versioning policy, no deprecation policy, no
+  Sunset or Deprecation header, and no changelog. This is recorded as a verified absence: no
+  StatusPage or Deprecation pointer is wired into apis.yml, because wiring one would assert a
+  page Spiber does not serve.
+api: spiber-content-api
+versioning:
+  scheme: namespace-in-path
+  current: wp/v2
+  policy_published: false
+  policy_url: null
+deprecation:
+  policy_published: false
+  policy_url: null
+  rfc8594_headers_observed: false
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+status_page:
+  published: false
+  url: null
+  probes:
+  - url: https://spiber.inc/en
+    status: 200
+    note: corporate site only; no status subdomain or status link anywhere on it
+sla:
+  published: false
+  url: null
+changelog:
+  published: false
+  url: null
+support:
+  contact_page: https://spiber.inc/en/contact-us
+  contact_page_status: 500
+  note: >-
+    The company's own English contact page returned HTTP 500 on 2026-08-29, so it is not wired as
+    a Support pointer in apis.yml. This is a broken page on the provider's site, worth reporting
+    back to them.

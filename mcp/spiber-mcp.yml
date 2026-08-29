@@ -1,0 +1,60 @@
+generated: '2026-08-29'
+method: derived
+source: >-
+  derived from the live route table at https://spiber.xsrv.jp/api/wp-json/ (HTTP 200); no MCP
+  server was found for Spiber
+note: >-
+  Spiber ships no MCP server. Searches of the company site, its verified GitHub organization
+  (github.com/Spiber, 0 public repositories), npm and PyPI returned nothing, and every
+  /.well-known/ probe on both hosts returned 404. The tools below are a DERIVED CANDIDATE list
+  computed from the read-only content routes the WordPress REST service publishes about itself.
+  They describe what an MCP server over this surface could offer; none of them exists today, and
+  no endpoint URL is asserted.
+status: candidate
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: none
+  verified: derived
+discovery_probes:
+- url: https://spiber.inc/.well-known/ai-plugin.json
+  status: 404
+- url: https://spiber.xsrv.jp/.well-known/ai-plugin.json
+  status: 404
+- url: https://registry.npmjs.org/-/v1/search?text=spiber&size=5
+  status: 200
+  result: 0 packages
+- url: https://api.github.com/orgs/Spiber
+  status: 200
+  result: 0 public repositories
+tools:
+- name: list_news
+  description: List Spiber's English-language news items.
+  rest: GET /wp/v2/news_en
+  confidence: high
+- name: list_news_ja
+  description: List Spiber's Japanese-language news items.
+  rest: GET /wp/v2/news
+  confidence: high
+- name: list_academic_papers
+  description: List Spiber's published academic papers.
+  rest: GET /wp/v2/academic-papers
+  confidence: high
+- name: list_creations
+  description: List brand collaborations and finished goods made with Brewed Protein materials.
+  rest: GET /wp/v2/creations
+  confidence: high
+- name: list_projects
+  description: List Spiber projects, optionally filtered by department.
+  rest: GET /wp/v2/projects
+  confidence: high
+- name: list_open_positions
+  description: List Spiber's open roles, optionally filtered by department.
+  rest: GET /wp/v2/positions
+  confidence: high
+- name: get_page
+  description: Retrieve a corporate site page by id.
+  rest: GET /wp/v2/pages/{id}
+  confidence: high

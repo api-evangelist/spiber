@@ -1,0 +1,50 @@
+generated: '2026-08-29'
+method: probed
+source: https://spiber.xsrv.jp/api/wp-json/ (WordPress REST discovery document, HTTP 200)
+note: >-
+  Spiber publishes no authentication documentation because it publishes no developer program.
+  This profile is read directly off the live WordPress REST discovery document the service serves
+  about itself, plus observed anonymous responses. Public content reads require no credential at
+  all; everything else is permission-gated behind WordPress capabilities. There is no OAuth 2.0
+  authorization server, no OpenID Connect discovery document, and no API-key issuance surface.
+api: spiber-content-api
+base_url: https://spiber.xsrv.jp/api/wp-json
+anonymous_access:
+  supported: true
+  scope: read-only access to published content routes (wp/v2 posts, pages, media, types,
+    taxonomies, and the custom/v1 menus and news listings)
+  evidence: 'GET /wp/v2/pages?per_page=1 returned HTTP 200 with X-WP-Total: 20 and no credential'
+schemes:
+- id: application-passwords
+  type: http
+  scheme: basic
+  description: >-
+    WordPress Application Passwords. Declared by the service in its own discovery document under
+    authentication.application-passwords.
+  authorization_endpoint: https://spiber.xsrv.jp/api/wp-admin/authorize-application.php
+  evidence: authentication.application-passwords.endpoints.authorization in the wp-json root
+  documented_by_provider: false
+- id: jwt-auth
+  type: http
+  scheme: bearer
+  bearer_format: JWT
+  description: >-
+    A JWT namespace is registered on the service (jwt-auth/v1 with /token and /token/validate
+    routes). Token issuance requires WordPress credentials; no public registration exists.
+  token_endpoint: https://spiber.xsrv.jp/api/wp-json/jwt-auth/v1/token
+  validate_endpoint: https://spiber.xsrv.jp/api/wp-json/jwt-auth/v1/token/validate
+  evidence: namespaces[] includes "jwt-auth/v1" in the wp-json root discovery document
+  documented_by_provider: false
+- id: cookie-nonce
+  type: apiKey
+  in: header
+  name: X-WP-Nonce
+  description: >-
+    Cookie authentication with an X-WP-Nonce header, used by the site's own front end. Not
+    available to third parties.
+  evidence: 'Access-Control-Allow-Headers on every response lists Authorization, X-WP-Nonce'
+  documented_by_provider: false
+oauth2: false
+openid_connect: false
+mutual_tls: false
+docs: null

@@ -1,0 +1,55 @@
+generated: '2026-08-29'
+method: probed
+source: live GET probes of /.well-known/* on every host in apis.yml
+note: >-
+  Every probed path returned 404 on both hosts. spiber.inc answers 404 with an 84KB Next.js
+  application shell (the site is a JS-rendered front end), spiber.xsrv.jp answers 404 with the
+  Xserver error page. No .well-known document is served, so no WellKnown or SecurityTxt pointer
+  is wired in apis.yml — this file records a verified absence, not a presence.
+hosts:
+- host: spiber.inc
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null
+- host: spiber.xsrv.jp
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+    file: null
+  - path: /.well-known/openid-configuration
+    status: 404
+    file: null
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+    file: null
+  - path: /.well-known/api-catalog
+    status: 404
+    file: null
+  - path: /.well-known/ai-plugin.json
+    status: 404
+    file: null
+  - path: /.well-known/agent-card.json
+    status: 404
+    file: null
+  - path: /.well-known/agent.json
+    status: 404
+    file: null

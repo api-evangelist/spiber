@@ -1,0 +1,14 @@
+generated: '2026-08-29'
+method: searched
+source: https://spiber.inc/en
+note: >-
+  Spiber is a materials manufacturer. It sells Brewed Protein fiber, resin, and film to brands
+  through commercial supply agreements, not through a self-serve developer plan. There is no
+  pricing page, no plans page, no signup, and no metered API product. The only HTTP API surface
+  (the WordPress REST content backend at spiber.xsrv.jp/api/wp-json) is unpriced website
+  infrastructure with no commercial offer attached. plan_count 0 is the accurate reading, not a
+  gap in the search.
+plan_count: 0
+plans: []
+pricing_page: null
+signup: null

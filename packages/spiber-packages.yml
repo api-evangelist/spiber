@@ -1,0 +1,25 @@
+generated: '2026-08-29'
+method: searched
+source: >-
+  registry.npmjs.org search, pypi.org, api.github.com/orgs/Spiber, and spiber.inc site search
+note: >-
+  Spiber publishes no client libraries. The npm registry search for "spiber" returns 0 objects,
+  pypi.org/pypi/spiber/json returns Not Found, and the company's verified GitHub organization
+  (github.com/Spiber, name "Spiber Inc.", blog www.spiber.jp, email develop@spiber.jp, created
+  2013-03-26) has 0 public repositories. No SDKs pointer is wired in apis.yml because there is no
+  SDK to point at.
+package_count: 0
+packages: []
+registries_checked:
+- registry: npm
+  url: https://registry.npmjs.org/-/v1/search?text=spiber&size=5
+  status: 200
+  result: 0 packages
+- registry: pypi
+  url: https://pypi.org/pypi/spiber/json
+  status: 404
+  result: not found
+- registry: github
+  url: https://api.github.com/orgs/Spiber
+  status: 200
+  result: organization exists, 0 public repositories

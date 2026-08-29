@@ -1,0 +1,58 @@
+generated: '2026-08-29'
+method: probed
+source: >-
+  live probes of https://spiber.xsrv.jp/api/wp-json/ and https://spiber.inc, plus
+  security/spiber-domain-security.yml
+note: >-
+  Spiber makes no compliance or standards claims on any public page, and its one HTTP API surface
+  asserts none in its own discovery document. Every entry below is therefore false with the
+  evidence that established it. No Compliance pointer is wired into apis.yml, because there is no
+  published certification or compliance program to point at.
+api: spiber-content-api
+standards:
+- id: oauth2
+  conforms: false
+  evidence: >-
+    No oauth2 flow is declared; the discovery document advertises only
+    authentication.application-passwords. /.well-known/oauth-authorization-server returned 404 on
+    both hosts.
+- id: oidc
+  conforms: false
+  evidence: /.well-known/openid-configuration returned 404 on spiber.inc and spiber.xsrv.jp
+- id: rfc9457
+  conforms: false
+  evidence: >-
+    Observed 404 error body is the WordPress code/message/data.status object served as
+    application/json, not application/problem+json
+- id: rfc9116
+  conforms: false
+  evidence: /.well-known/security.txt returned 404 on both hosts
+- id: rfc8594
+  conforms: false
+  evidence: No Sunset or Deprecation header observed on any live response
+- id: pagination
+  conforms: true
+  evidence: >-
+    'page/per_page query parameters with X-WP-Total, X-WP-TotalPages and RFC 8288 Link rel="next"
+    observed on GET /wp/v2/pages?per_page=1'
+- id: idempotency
+  conforms: false
+  evidence: No idempotency-key mechanism published or observed; no anonymous write surface exists
+- id: hsts
+  conforms: true
+  evidence: 'spiber.inc serves Strict-Transport-Security with max-age 63072000 (probed 2026-08-28)'
+- id: dnssec
+  conforms: false
+  evidence: No DNSSEC on spiber.inc or xsrv.jp (probed 2026-08-28)
+- id: dmarc
+  conforms: partial
+  evidence: 'spiber.inc publishes SPF and DMARC with policy p=none (probed 2026-08-28)'
+domain_standard:
+  applicable: false
+  note: >-
+    Spiber's market is advanced biomaterials manufacturing and textile supply. Its published
+    surface is a corporate website content API with no industry message format attached, and the
+    company declares no domain standard in any contract. Reward-only check: nothing is invented to
+    fill the slot.
+certifications: []
+compliance_programs: []
