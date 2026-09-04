@@ -11,6 +11,21 @@ description: >-
   assessment. Spiber is a materials manufacturer rather than a software vendor and publishes no
   developer program, developer portal, SDKs, or product API; the only machine-readable HTTP surface
   it serves is the read-only WordPress REST content API behind its corporate website.
+accessModel:
+  pricing: unknown
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Unknown
+  confidence: low
+  probe_state: none
+  source:
+  - authentication
+  - rate-limits
+  - security
+  generated: '2026-09-03'
+  method: derived
 image: https://spiber.inc/en/opengraph-image.jpeg
 url: https://raw.githubusercontent.com/api-evangelist/spiber/refs/heads/main/apis.yml
 x-type: company
@@ -58,8 +73,9 @@ apis:
     url: data-model/spiber-data-model.yml
   - type: RateLimits
     url: rate-limits/spiber-rate-limits.yml
-  - type: MCPServer
+  - type: X-MCPServerCandidate
     url: mcp/spiber-mcp.yml
+    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate — a tool list derived from the published API contracts, not an existing server. The scorer already read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type surfaces with a server that does not exist.'
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
