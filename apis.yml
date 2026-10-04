@@ -42,40 +42,21 @@ tags:
 - Textiles
 - Precision Fermentation
 - Japan
-- Content
 apis:
-- aid: spiber:spiber-content-api
-  name: Spiber Content API (WordPress REST)
-  description: 'The read-only WordPress REST API that backs spiber.inc. The service names itself "Spiber
-    API" in its own discovery document and is referenced from spiber.inc/robots.txt as the origin of the
-    site sitemap. It exposes the standard wp/v2 content namespace (posts, pages, media, taxonomies, types)
-    plus a small custom/v1 namespace the site uses for menus and news listings. It is corporate-website
-    infrastructure, not a published developer product: Spiber advertises no developer program, publishes
-    no reference documentation for it, and marks every response x-robots-tag noindex. Anonymous GET access
-    to the content routes is confirmed live; write, admin, migration, and jwt-auth routes are permission-gated.'
-  humanURL: https://spiber.inc/en
+- aid: spiber:spiber-xsrv-jp-api-website-wordpress-rest
+  name: Spiber Website (WordPress REST)
+  description: 'The public WordPress REST API (wp-json) of the Spiber website at spiber.xsrv.jp/api: the
+    route index of the site''s content management system, catalogued as one site surface rather than as
+    separate APIs.'
   baseURL: https://spiber.xsrv.jp/api/wp-json
   tags:
-  - Content
-  - CMS
   - WordPress
+  x-surface: platform-generated
   properties:
-  - type: Authentication
-    url: authentication/spiber-authentication.yml
-  - type: Conventions
-    url: conventions/spiber-conventions.yml
-  - type: ErrorCatalog
-    url: errors/spiber-problem-types.yml
-  - type: DataModel
-    url: data-model/spiber-data-model.yml
-  - type: RateLimits
-    url: rate-limits/spiber-rate-limits.yml
-  - type: X-MCPServerCandidate
-    url: mcp/spiber-mcp.yml
-    note: 'Renamed from MCPServer 2026-09-03 (roadmap#247): the manifest self-describes as status: candidate
-      — a tool list derived from the published API contracts, not an existing server. The scorer already
-      read the manifest and reported mcp_server correctly; the MCPServer type was crediting the artifact-type
-      surfaces with a server that does not exist.'
+  - type: Documentation
+    url: https://spiber.xsrv.jp/api/wp-json
+  x-platform: wordpress
+  x-platform-surface: rest
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -114,6 +95,18 @@ common:
   url: plans/spiber-plans-pricing.yml
 - type: Packages
   url: packages/spiber-packages.yml
+- type: Authentication
+  url: authentication/spiber-authentication.yml
+- type: Conventions
+  url: conventions/spiber-conventions.yml
+- type: ErrorCatalog
+  url: errors/spiber-problem-types.yml
+- type: DataModel
+  url: data-model/spiber-data-model.yml
+- type: RateLimits
+  url: rate-limits/spiber-rate-limits.yml
+- type: X-MCPServerCandidate
+  url: mcp/spiber-mcp.yml
 x-enrichment:
   date: '2026-08-29'
   status: minimal
