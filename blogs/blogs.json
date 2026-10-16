@@ -9,11 +9,11 @@
       "method": "discovered"
     },
     {
-      "source": "https://spiber.inc/en/about",
-      "feed_url": "https://spiber.inc/en/about",
+      "source": "https://spiber.inc/en/news/feed",
+      "feed_url": "https://spiber.inc/en/news/feed",
       "title": "",
       "saved": 0,
-      "method": "none"
+      "method": "feed"
     },
     {
       "source": "https://spiber.inc/en/news/feed/",
@@ -21,8 +21,15 @@
       "title": "",
       "saved": 0,
       "method": "feed"
+    },
+    {
+      "source": "https://spiber.inc/en/about",
+      "feed_url": "https://spiber.inc/en/about",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
-  "post_count": 18,
-  "fetched": "2026-10-03T12:30:02Z"
+  "post_count": 19,
+  "fetched": "2026-10-10T13:15:00Z"
 }
